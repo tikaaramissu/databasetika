@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database & Resource Portal</title>
+    <!-- Menggunakan Tailwind CSS untuk tampilan modern dan responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen font-sans">
+
+    <!-- Header / Navigasi -->
+    <header class="bg-slate-900 text-white py-6 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">DataCenter Portal</h1>
+                <p class="text-gray-400 text-sm mt-1">Daftar database umum dan tautan akses langsung</p>
+            </div>
+            <!-- Fitur Pencarian Dinamis -->
+            <div class="w-full md:w-80">
+                <input type="text" id="searchInput" onkeyup="searchDatabase()" placeholder="Cari database atau kategori..." class="w-full px-4 py-2 rounded-lg bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 border border-slate-700">
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Grid Kartu Database -->
+        <div id="databaseGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- KARTU 1: Database PostgreSQL (Contoh) -->
+            <div class="db-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow" data-tags="postgresql database production server">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">PostgreSQL</span>
+                        <span class="text-xs text-gray-500">Status: Aktif</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Database Utama Produksi</h3>
+                    <p class="text-gray-600 text-sm mb-4">Menyimpan data transaksi, profil pengguna, dan riwayat aktivitas sistem utama.</p>
+                    <div class="space-y-2 text-xs text-gray-500 border-t pt-4">
+                        <p><strong>Host:</strong> <code class="bg-gray-100 px-1 py-0.5 rounded">db.main-server.com</code></p>
+                        <p><strong>Port:</strong> 5432</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-medium text-gray-400">Public Access</span>
+                    <a href="https://admin.main-server.com" target="_blank" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800">
+                        Buka pgAdmin &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- KARTU 2: Google Sheets / Data Publik (Contoh) -->
+            <div class="db-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow" data-tags="google sheets spreadsheet data kependudukan">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Google Sheets</span>
+                        <span class="text-xs text-gray-500">Status: Read-Only</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Data Sensus Penduduk 2026</h3>
+                    <p class="text-gray-600 text-sm mb-4">Spreadsheet kolaboratif berisi ringkasan data kependudukan tingkat kecamatan.</p>
+                    <div class="space-y-2 text-xs text-gray-500 border-t pt-4">
+                        <p><strong>Format:</strong> Spreadsheet Online</p>
+                        <p><strong>Terakhir Diperbarui:</strong> 10 April 2026</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-medium text-gray-400">Public Access</span>
+                    <a href="https://docs.google.com/spreadsheets/d/your-id-here/edit" target="_blank" class="inline-flex items-center text-sm font-semibold text-green-600 hover:text-green-800">
+                        Lihat Spreadsheet &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- KARTU 3: API Endpoint (Contoh JSON) -->
+            <div class="db-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow" data-tags="api json rest-api katalog produk">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">REST API</span>
+                        <span class="text-xs text-green-600 font-medium">Uptime 99.9%</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Katalog Produk API</h3>
+                    <p class="text-gray-600 text-sm mb-4">REST API publik yang menyediakan data katalog produk berformat JSON secara real-time.</p>
+                    <div class="space-y-2 text-xs text-gray-500 border-t pt-4">
+                        <p><strong>Method:</strong> <span class="bg-green-100 text-green-800 px-1.5 py-0.5 rounded font-mono text-[10px]">GET</span></p>
+                        <p><strong>Format Respon:</strong> application/json</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-medium text-gray-400">Public Access</span>
+                    <a href="https://api.domainanda.com/v1/products" target="_blank" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800">
+                        Akses API &rarr;
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 mt-12 text-center text-sm text-gray-500">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; 2026 DataCenter Portal. Semua data di halaman ini dikelola secara terbuka.</p>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript untuk Fitur Pencarian Instan -->
+    <script>
+        function searchDatabase() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('db-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let tags = cards[i].getAttribute('data-tags').toLowerCase();
+                let cardTitle = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                let cardText = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+                
+                if (tags.includes(input) || cardTitle.includes(input) || cardText.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
